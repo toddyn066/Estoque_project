@@ -1,0 +1,643 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+  scrollbar-width: thin;
+  scrollbar-color: #1db84c #888;
+  min-height: 100vh;
+}
+
+body {
+  background-color: #dfdfdf;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+li {
+  list-style: none;
+}
+
+/* ### HEADER ### */
+
+header {
+  width: 100%;
+  height: 12rem;
+  background-color: #000002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+header figure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+nav a {
+  transition: all 0.3s;
+  height: 30%;
+  aspect-ratio: 1/1;
+}
+
+header figure img:not(#logo) {
+  height: 100%;
+  aspect-ratio: 1/1;
+}
+
+#logo{
+  height: 100%;
+  object-fit: contain;
+}
+
+nav.container {
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+nav a:hover {
+  filter: drop-shadow(0px 8px 5px #1db84c);
+  transform: translateY(-8px);
+}
+
+nav a:active {
+  color: #fff;
+}
+
+.logout{
+  position: absolute;
+  right: 10%;
+  padding: 1rem;
+  height: inherit;
+}
+
+.logout>a{
+  display: flex;
+  align-items: center;
+  height: 100%;
+  
+  & img{
+    transition: all .2s;
+    height: 40%;
+    aspect-ratio: 1/1;
+    filter: drop-shadow(0 5px 8px #f00);
+
+  }
+}
+
+.logout img:hover{
+  transform: translateY(-5px);
+  filter: brightness(1.5);
+}
+
+/* ### container ### */
+
+main {
+  min-height: calc(100vh - 12rem - 15rem);
+}
+
+.content {
+  height: 100%;
+  width: min(100% - 13rem, 80rem);
+  margin-inline: auto;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+/* ### table ### */
+
+table {
+  text-align: center;
+  border-collapse: collapse;
+  max-width: 90rem;
+  margin-top: 2rem;
+}
+
+table thead tr {
+  border-bottom: 0.2rem solid #333;
+  border-top: 0.2rem solid #333;
+  font-size: 2.4rem;
+}
+
+table th {
+  width: 18rem;
+  padding: 1rem;
+}
+
+table td {
+  font-size: 1.6rem;
+  text-wrap: wrap;
+  word-wrap: break-word;
+}
+
+table tbody tr td.td-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 8rem;
+}
+
+table tbody tr {
+  border-bottom: 0.1rem solid #ccca;
+  height: 8rem;
+}
+
+/* ### input ### */
+
+/* ## search ## */
+
+.search-form,
+#atualizar {
+  position: sticky;
+  background: #f5f5f5;
+  border-radius: 2.5rem;
+  transition: all 0.3s;
+  flex-wrap: wrap;
+  max-width: 65rem;
+  padding: 0 0.5rem;
+  display: flex;
+}
+
+.search-form {
+  z-index: 2;
+  min-height: 8rem;
+  margin-bottom: 2rem;
+  top: 2rem;
+}
+
+form input {
+  text-align: center;
+  border-radius: 1.2rem;
+  height: 3.2rem;
+  border: #333 0.1rem solid;
+  width: 80%;
+}
+
+.search-form section:nth-child(2) input {
+  width: 30%;
+}
+
+.search-form section:nth-child(2) label {
+  width: 100%;
+}
+
+label {
+  margin-bottom: 0.5rem;
+}
+
+.search {
+  position: relative;
+}
+
+.search.active input {
+  border-radius: 1.2rem 1.2rem 0 0;
+}
+
+form input:focus {
+  outline: #f6cf3f 0.2rem solid;
+}
+
+form select {
+  text-align: center;
+  border-radius: 1.2rem;
+  height: 3.2rem;
+  border: #333 0.1rem solid;
+  background-color: transparent;
+  padding: 0 0.5rem;
+  width: auto;
+  text-wrap: wrap;
+}
+
+form select:focus {
+  outline: #f6cf3f 0.2rem solid;
+}
+
+form section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  flex-wrap: wrap;
+  min-height: 1rem;
+  width: 16rem;
+  flex-grow: 1;
+  padding: 1rem 0;
+}
+
+label {
+  font-size: 1.6rem;
+}
+
+/* ## atualizar ##  */
+
+#atualizar {
+  z-index: 1;
+  height: auto;
+}
+
+#atualizar section {
+  min-width: 16rem;
+}
+
+#atualizar button::before {
+  background-image: url("../img/plus.svg");
+}
+
+/* ## lista de sugestões ## */
+
+.search .list {
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  max-height: 28rem;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.search.active .list {
+  opacity: 1;
+  pointer-events: auto;
+  background-color: #fff;
+  width: 80%;
+  border-radius: 0 0 1.2rem 1.2rem;
+}
+
+.list li {
+  padding: 0.4rem;
+  display: none;
+  width: 100%;
+  cursor: default;
+  border-radius: 0.3rem;
+  font-size: 1.6rem;
+  max-height: 5rem;
+  font-weight: 400;
+  border-top: #7070701e 0.1rem solid;
+  z-index: 10;
+}
+
+.search.active .list li {
+  display: block;
+}
+.list li:hover {
+  background: #efefef;
+}
+
+.list li.selected {
+  background-color: #f0f0f0;
+  color: #333;
+  font-weight: bold;
+}
+
+/* ## botão de pesquisar ## */
+
+form button {
+  width: 11rem;
+  height: 4rem;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border: none;
+  transition: color 0.5s;
+  z-index: 1;
+  font-size: 1.6rem;
+  border-radius: 1rem;
+  background-color: #03301f;
+  color: #ffd;
+  font-weight: 600;
+}
+
+form button:before {
+  content: "";
+  background-image: url("../img/search.svg");
+  background-repeat: no-repeat;
+  background-size: 25%;
+  background-position: center;
+  position: absolute;
+  background-color: #06c379;
+  height: 4rem;
+  width: 11rem;
+}
+
+form button:hover {
+  color: transparent;
+  background-color: #06c379;
+  transition: 0.4s;
+}
+
+form button:before {
+  bottom: 100%;
+  right: 100%;
+  transition: all 0.5s;
+}
+
+form button:hover:before {
+  bottom: 0;
+  right: 0;
+}
+
+form button:active::before {
+  transform: scale(1.1);
+  transition: all 0.2s;
+}
+
+/* # botão de adicionar # */
+
+.search-form i {
+  background-color: #06c379;
+  position: absolute;
+  top: 50%;
+  right: -5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+  padding: 0.4rem 0.4rem 0 0.4rem;
+  border-radius: 2rem;
+  transition: 0.3s ease-in-out;
+}
+
+.search-form i:has(.add input:checked) {
+  background-color: #ee0d0d;
+}
+
+.add {
+  position: relative;
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+}
+
+.add input {
+  display: none;
+}
+
+.add span {
+  display: block;
+  position: absolute;
+  height: 0.4rem;
+  width: 3rem;
+  background: black;
+  border-radius: 0.9rem;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: 0.25s ease-in-out;
+}
+
+.add span:nth-of-type(1) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.add span:nth-of-type(2) {
+  left: 50%;
+  top: 0;
+  transform-origin: left center;
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.add input:checked ~ span:nth-of-type(1) {
+  top: 44%;
+  left: 0;
+  transform: rotate(45deg);
+  background: white;
+}
+
+.add input:checked ~ span:nth-of-type(2) {
+  top: 44%;
+  left: 0;
+  transform-origin: center;
+  transform: rotate(135deg);
+  background: white;
+}
+
+/* ## botões deletar.php ## */
+
+.btn-action {
+  transform: scale(1.2);
+}
+
+.btn-action:nth-child(2):hover {
+  color: transparent;
+  background-color: #e63f66;
+  transition: 0.4s;
+}
+
+.btn-action:nth-child(1):before {
+  background-image: url(../img/volta.png);
+}
+.btn-action:nth-child(2):before {
+  background-image: url(../img/lixeira.png);
+  background-color: #e63f66;
+}
+
+/* ## botões de ação ## */
+
+section.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+button.btn {
+  border: none;
+  width: 6rem;
+  height: 4rem;
+  border-radius: 3em;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  background: #03301f;
+  cursor: pointer;
+  transition: all 250ms ease-in-out;
+}
+
+.btn.delete {
+  background: #b21e4b;
+}
+
+.sparkle {
+  fill: #ebfef4;
+  transition: all 800ms ease;
+  transform: scale(0.5);
+}
+
+.btn.delete .sparkle {
+  fill: #ffffff;
+  transform: scale(0.4);
+}
+
+button.btn:hover {
+  background: linear-gradient(0deg, #335a49a2, #25ac78);
+  transform: translateY(-0.2rem);
+}
+
+button.btn.delete:hover {
+  background: linear-gradient(0deg, #7c5b5bc2, #e22121dc);
+  transform: translateY(-0.2rem);
+}
+
+button.btn:hover .sparkle {
+  fill: #ffffff96;
+  transform: scale(0.55);
+}
+
+button.btn.delete:hover .sparkle {
+  fill: #fff;
+  transform: scale(0.55);
+}
+
+/* ## form vendas.php ## */
+
+.box {
+  display: flex;
+  justify-content: space-between;
+  max-width: 60rem;
+  margin: 2rem 0;
+  padding: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.box section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  flex-grow: 1;
+}
+
+.box section input {
+  width: 12rem;
+}
+
+.box section b {
+  font-size: 1.6rem;
+  height: 3.2rem;
+  width: 12rem;
+  border: #333 0.1rem solid;
+  border-radius: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box button:before {
+  background-image: url("../img/send.svg");
+}
+
+/* ### card deletar.php ### */
+
+.card {
+  max-width: 90rem;
+  min-height: 50rem;
+  border-radius: 3rem;
+  background: lightgrey;
+  box-shadow: rgba(50, 50, 93, 0.25) 0rem 3rem 5rem -1.2rem inset,
+    rgba(0, 0, 0, 0.3) 0rem 1.8rem 2.6rem -1.8rem inset;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-wrap: wrap;
+}
+
+.card article {
+  font-size: 2rem;
+  text-align: center;
+  max-width: 50rem;
+}
+
+/* ##### FOOTER ##### */
+
+footer {
+  background: #343333;
+  width: 100%;
+  display: flex;
+  filter: drop-shadow(0px -5px 5px #1db84cda);
+  color: #fff;
+  min-height: 12rem;
+  font-size: 1.6rem;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 5rem;
+}
+
+footer h4 {
+  margin: 1rem 0;
+}
+
+footer b {
+  font-style: italic;
+  filter: drop-shadow(2px 2px 5px #1db84c);
+}
+
+footer b:hover {
+  transition: all 0.5s;
+  font-size: 1.8rem;
+  transform: scale3d(1, 1, 1);
+  color: red;
+  filter: drop-shadow(2px 2px 5px #4040404c);
+}
+
+/* --------------------------------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  html {
+    font-size: 55%;
+  }
+  #logo{
+    width: 70%;
+  }
+  .logout{
+    right: 5%;
+  }
+  #atualizar {
+    margin-bottom: 4rem;
+  }
+}
+
+@media (max-width: 834px){
+  .logout{
+    right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    height: 10rem;
+  }
+  table th {
+    max-width: 10rem;
+    font-size: 2.1rem;
+  }
+  button.btn {
+    transform: scale(0.8);
+  }
+  .card h2 {
+    font-size: 2.5rem;
+  }
+  .card button {
+    transform: scale(1.1);
+  }
+}
