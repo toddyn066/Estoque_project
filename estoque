@@ -1,0 +1,58 @@
+create database estoque_longneck;
+use estoque_longneck;
+
+drop database estoque_longneck;
+
+CREATE TABLE produtos_tbl (
+  pro_id INT PRIMARY KEY AUTO_INCREMENT not null,
+  pro_nome VARCHAR(100) NOT NULL
+)engine=InnoDB;
+
+CREATE TABLE estoque_tbl (
+  est_id INT PRIMARY KEY AUTO_INCREMENT not null,
+  pro_id INT not null,
+  est_quantidade INT not null,
+  est_data_validade char(7) not null,
+  FOREIGN KEY (pro_id) REFERENCES produtos_tbl(pro_id)
+)engine=InnoDB;
+
+create table login_tbl(
+	log_id int primary key auto_increment not null,
+    log_email varchar(45) not null,
+    log_senha varchar(30) not null
+)engine=InnoDB;
+
+insert into login_tbl(log_email, log_senha) values ('villa-garden@gmail.com', '3stoque@336');
+
+insert into produtos_tbl (pro_nome) values ('Ice'), ('Stella Long'), ('Becks Long'), ('GT'), ('Sense'), ('Michelob'), ('Stella Gold'), ('Spaten Long'),
+ ('Patogonia Bohemia'), ('Patogônia Amber'), ('Patogônia Ipa'), ('Colorado Appia'), ('Colorado Ribeirão'), ('Bud long'), ('Bud Zero');
+
+insert into estoque_tbl (pro_id, est_quantidade, est_data_validade) values 
+(1, 120, '2025/07'), (1, 24, '2025/06'),
+(2, 57, '2025/02'),
+(3, 59, '2025/01'),
+(4, 18, '2025/02'), (4, 24, '2025/03'),
+(5, 36, '2025/03'), (5, 38, '2025/02'),
+(6, 2, '2024/09'), (6, 24, '2024/10'), (6, 8, '2025/11'), (6, 24, '2024/12'),
+(7, 36, '2024/12'),
+(8, 96, '2024/10'),
+(9, 12, '2025/02'),
+(10, 24, '2024/11'), (10, 12, '2025/03'),
+(11, 96, '2025/03'),
+(12, 25, '2024/11'),
+(13, 12, '2024/12'), (13, 26, '2025/01'),
+(14, 28, '2024/12'), (14, 24, '2024/12'),
+(15, 12, '2024/10');
+
+select est_id, pro_id, pro_nome, est_quantidade, est_data_validade from estoque_tbl inner join produtos_tbl using (pro_id);
+
+SELECT est_id, pro_id, pro_nome, est_quantidade, est_data_validade FROM produtos_tbl INNER JOIN estoque_tbl USING (pro_id) WHERE est_id = '24';
+
+select * from produtos_tbl;
+
+select pro_id, est_quantidade, est_data_validade from estoque_tbl;
+select pro_id, est_quantidade, est_data_validade from estoque_tbl where pro_id = 1 and est_data_validade = '2025/07';
+
+delete from estoque_tbl where est_id = 27;
+
+
